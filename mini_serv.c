@@ -136,7 +136,7 @@ int receive_big_buffer(int fd) {
 
     int nls = count_nl(buff);
     if (nls == 0 || (strlen(buff) < 4096 && nls < 2)) { // si le buff a pas de \n OU si il fait - de 4096 caractères et qu'il en a que 1 (celui à la fin en général)
-                                                        // j'avais des bugs quand je mettait pas la condition < 4096 je sais pas trop pourquoi
+                                                        // on l'envoie en un seul send
         if (client->newline) {
             send_to_all(msg, strlen(msg), fd);
             client->newline = 0;
