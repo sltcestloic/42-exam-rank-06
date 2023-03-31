@@ -195,8 +195,8 @@ int main(int ac, char **av) {
     while (1) {
         int nfds = get_max_fd();
 
-        FD_COPY(&pool_set, &read_set);
-        FD_COPY(&pool_set, &write_set);
+	read_set = pool_set;
+	write_set = pool_set;
 
         if (select(nfds + 1, &read_set, &write_set, NULL, 0) < 0)
             continue;
